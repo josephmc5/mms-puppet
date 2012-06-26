@@ -1,8 +1,8 @@
 class mms {
-	file { "/root/10gen-mms-agent.tar.gz":
+    file { "/root/10gen-mms-agent.tar.gz":
         ensure => present,
-		source => "puppet:///modules/mms/10gen-mms-agent.tar.gz",
-	}
+        source => "puppet:///modules/mms/10gen-mms-agent.tar.gz",
+    }
     file { "/opt":
         ensure => directory,
     }
@@ -28,9 +28,9 @@ class mms {
         target  =>  "/lib/init/upstart-job",
         require => File["/etc/init/mms-agent.conf"],
     }
-	service {"mms-agent":
-	    ensure => running,
-	    enable => true,
+    service {"mms-agent":
+        ensure => running,
+        enable => true,
         require => [File["/var/log/mms", "/etc/init/mms-agent.conf"], Exec["tar zxf /root/10gen-mms-agent.tar.gz -C /opt"]],
-	}
+    }
 }

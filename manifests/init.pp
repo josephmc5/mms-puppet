@@ -15,7 +15,7 @@ class mms {
         require => [File["/root/10gen-mms-agent.tar.gz"], Package["pymongo"]],
         path    => ['/bin/', '/usr/bin/'],
     }
-    file { "/var/log/mms":
+    file { "/var/log/mms-agent":
         ensure => directory,
     }
     file { "/etc/init/mms-agent.conf":
@@ -31,6 +31,6 @@ class mms {
     service {"mms-agent":
         ensure => running,
         enable => true,
-        require => [File["/var/log/mms", "/etc/init/mms-agent.conf"], Exec["tar zxf /root/10gen-mms-agent.tar.gz -C /opt"]],
+        require => [File["/var/log/mms-agent", "/etc/init/mms-agent.conf"], Exec["tar zxf /root/10gen-mms-agent.tar.gz -C /opt"]],
     }
 }
